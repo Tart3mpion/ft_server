@@ -1,11 +1,12 @@
 service mysql start
+
 #Rights
 chown -R www-data /var/www/*
 chmod -R 755 /var/www/*
 
 #website folder
-mkdir -p var/wwww/localhost
-cp ./infos.php var/www/localhost/infos.php
+mkdir -p var/www/localhost
+cp ./infos.php var/www/localhost/
 
 #Nginx
 mv ./nginx.conf /etc/nginx/sites-available/
@@ -19,6 +20,15 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 3650 -nodes -out etc/nginx/ssl/
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz 
 tar xvf phpMyAdmin-4.9.7-all-languages.tar.gz 
 mv phpMyAdmin-4.9.7-all-languages/ /usr/share/phpmyadmin
+cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
+
+
+#mysql
+#mysql_secure_installation
+mariadb < /usr/share/phpmyadmin/sql/create_tables.sql
+#echo "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'password';"
+#echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;"
+#echo "exit"
 
 service php7.3-fpm start
 service nginx start
