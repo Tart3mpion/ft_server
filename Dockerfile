@@ -5,12 +5,12 @@ LABEL ldes-cou (ldes-cou@student.42.fr)
 RUN apt-get update
 RUN apt-get install -y nginx
 RUN apt-get install openssl
-#RUN apt-get install -y mariadb-server
+RUN apt-get install -y mariadb-server
 RUN apt-get install -y wget
-#RUN apt-get install -y vim
+RUN apt-get install -y vim
 
-COPY srcs/config.nginx ./
-COPY srcs/config.inc.php ./
+COPY srcs/nginx.conf ./
+COPY srcs/infos.php ./
 COPY srcs/config.sh ./
 
 EXPOSE 80
