@@ -40,9 +40,9 @@ cp ./wp-config.php /var/www/localhost/wordpress/
 #mysql
 #mysql_secure_installation
 
-echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password
-echo "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'root'@'localhost'" | mysql -u root --skip-password  # pb d'acces avec root créer un utilisateur user
-echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;" | mysql -u root --skip-password 
+echo "CREATE DATABASE your_wordpress;" | mysql -u root --skip-password
+echo "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'user'@'localhost'" | mysql -u root --skip-password  # pb d'acces avec root créer un utilisateur user
+echo "GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost' WITH GRANT OPTION;" | mysql -u root --skip-password 
 #idem grant access to user
 echo "FLUSH PRIVILEGES ;" | mysql -u root --skip-password
 
