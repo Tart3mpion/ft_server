@@ -8,7 +8,7 @@ chmod -R 755 /var/www/*
 
 #website folder
 mkdir -p var/www/localhost/
-cp ./infos.php var/www/localhost/index.php
+#cp ./infos.php var/www/localhost/
 
 #Nginx
 mv ./nginx.conf /etc/nginx/sites-available/
@@ -22,11 +22,11 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 3650 -nodes -out /etc/nginx/ssl
 
 
 #phpmyadmin
-mkdir /var/www/localhost/phpmyadmin
+#mkdir /var/www/localhost/phpmyadmin
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
 tar xvf phpMyAdmin-4.9.7-all-languages.tar.gz
 mv phpMyAdmin-4.9.7-all-languages/ /var/www/localhost/phpmyadmin
-cp ./config.php /var/www/localhost/phpmyadmin
+cp ./config.php /var/www/localhost/phpmyadmin/config.inc.php
 
 
 # wordpress
@@ -39,10 +39,12 @@ cp ./wp-config.php /var/www/localhost/wordpress/
 
 #mysql
 #mysql_secure_installation
+
 echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password
-echo "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'root'@'localhost' IDENTIFIED BY 'password';" #| mysql -u root --skip-password
-echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;" #| mysql -u root --skip-password
-echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
+echo "GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'root'@'localhost'" | mysql -u root --skip-password  # pb d'acces avec root créer un utilisateur user
+echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;" | mysql -u root --skip-password 
+#idem grant access to user
+echo "FLUSH PRIVILEGES ;" | mysql -u root --skip-password
 
 service php7.3-fpm start
 service nginx start
