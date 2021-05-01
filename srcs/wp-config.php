@@ -21,10 +21,12 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wordpress' );
+define('WP_ALLOW_REPAIR', true);
+
+define( 'DB_NAME', 'your_wordpress' );
 
 /** MySQL database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'user' );
 
 /** MySQL database password */
 define( 'DB_PASSWORD', '' );
