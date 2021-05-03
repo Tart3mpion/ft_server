@@ -23,10 +23,10 @@
 /** The name of the database for WordPress */
 define('WP_ALLOW_REPAIR', true);
 
-define( 'DB_NAME', 'your_wordpress' );
+define( 'DB_NAME', 'wp_42' );
 
 /** MySQL database username */
-define( 'DB_USER', 'user' );
+define( 'DB_USER', 'ldes-cou' );
 
 /** MySQL database password */
 define( 'DB_PASSWORD', '' );

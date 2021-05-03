@@ -1,10 +1,5 @@
 
-service mysql start
-
-#Rights
-
-chown -R www-data /var/www/*
-chmod -R 755 /var/www/*
+#service mysql start
 
 #Nginx
 mv ./nginx.conf /etc/nginx/sites-available/
@@ -20,24 +15,27 @@ wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-language
 tar xvf phpMyAdmin-4.9.7-all-languages.tar.gz
 mv phpMyAdmin-4.9.7-all-languages/ /var/www/html/phpmyadmin
 cp ./config.php /var/www/html/phpmyadmin/config.inc.php
-cp /var/www/html/phpmyadmin/index.php /var/www/html/
-
+rm /var/www/html/index.nginx-debian.html
 
 # wordpress
 wget -c https://wordpress.org/latest.tar.gz
 tar -xvzf latest.tar.gz
 mv ./wordpress/ /var/www/html/
 cp ./wp-config.php /var/www/html/wordpress/
+cp ./monpetitponey.png /var/www/html/wordpress/
+chown -R www-data:www-data /var/www/html/wordpress/*
+cp ./wp_42.sql /var/www/html/wordpress/
 
 #mysql
-echo "CREATE DATABASE your_wordpress;" | mysql -u root --skip-password
-echo "CREATE USER 'user'@'localhost'"| mysql -u root --skip-password 
-echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;" | mysql -u root --skip-password 
-echo "GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';"| mysql -u root --skip-password 
-echo "FLUSH PRIVILEGES ;" | mysql -u root --skip-password
+service mysql start
+echo  "CREATE DATABASE wp_42;" | mysql -u root
+echo "CREATE USER 'ldes-cou'@'localhost';" | mysql -u root
+echo "GRANT ALL PRIVILEGES ON wp_42.* TO 'ldes-cou'@'localhost';" | mysql -u root
+echo "FLUSH PRIVILEGES;" | mysql -u root
+mysql wp_42 -u root < wp_42.sql
 
 service php7.3-fpm start
 service nginx start
-#sleep infinity
+sleep infinity
 
 bash
