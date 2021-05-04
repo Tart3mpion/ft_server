@@ -15,11 +15,15 @@ COPY srcs/nginx.conf ./
 COPY srcs/infos.php ./
 COPY srcs/config.sh ./
 COPY srcs/config.php ./
+COPY srcs/monpetitponey.png ./
 COPY srcs/wp-config.php ./
+COPY srcs/wp-launch.sh ./
+COPY srcs/wp_42.sql ./
+COPY srcs/autoindex.sh ./
 
 EXPOSE 80
 EXPOSE 443
 
-ENV AUTOINDEX on
+ENV autoindex=on
 CMD bash ./config.sh
 

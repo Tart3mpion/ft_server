@@ -36,6 +36,7 @@ mysql wp_42 -u root < wp_42.sql
 
 service php7.3-fpm start
 service nginx start
-sleep infinity
+echo "Autoindex is set to $autoindex"
+#sleep infinity
 
 bash
