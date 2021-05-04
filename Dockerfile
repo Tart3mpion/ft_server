@@ -2,7 +2,7 @@ FROM debian:buster
 
 LABEL ldes-cou (ldes-cou@student.42.fr)
 
-#WORKDIR /ft_server
+WORKDIR /ft_server
 
 #download services
 RUN apt-get update && apt-get install -y \
@@ -18,7 +18,7 @@ RUN apt-get install -y php7.3-fpm php7.3-common php7.3-mysql php7.3-gmp php7.3-c
 
 
 #install nginx
-COPY srcs/nginx.conf ./etc/nginx/sites-available/
+COPY srcs/nginx.conf /etc/nginx/sites-available/
 COPY srcs/config.sh ./
 RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/ \
 && rm -rf /etc/nginx/sites-enabled/default
@@ -35,10 +35,10 @@ COPY srcs/config.php /var/www/html/phpmyadmin/config.inc.php
 
 #install wordpress
 RUN mv ./wordpress/ /var/www/html/
-COPY srcs/monpetitponey.png ./var/www/html/wordpress/
-COPY srcs/wp_42.sql ./var/www/html/wordpress/
+COPY srcs/monpetitponey.png /var/www/html/wordpress/
+COPY srcs/wp_42.sql /var/www/html/wordpress/
 COPY srcs/wp-launch.sh ./
-COPY srcs/wp-config.php ./var/www/html/wordpress/
+COPY srcs/wp-config.php /var/www/html/wordpress/
 RUN chown -R www-data:www-data /var/www/html/wordpress/*
 
 #set autoindex
